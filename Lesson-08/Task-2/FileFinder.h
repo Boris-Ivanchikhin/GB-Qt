@@ -32,6 +32,7 @@ public slots:
     void slotFind  ();
     void slotBrowse();
 
+    void newSearchStarted(); //
     void deleteThread(); // Удаляем поток при завершение работы
     void getFiles(QStringList); // Получаем найденные файлы
 };

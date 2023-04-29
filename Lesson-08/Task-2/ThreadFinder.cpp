@@ -12,9 +12,10 @@ ThreadFinder::ThreadFinder(const QDir& dir, const QStringList& mask, QObject *pa
 void ThreadFinder::run()
 {
 
-    m_result.clear();
+    emit startedThread();
+    //m_result.clear();
     proceed(m_dir);
-    emit foundFiles(m_result);
+    //emit foundFiles(m_result);
     emit stopedThread();
 
 }
@@ -24,22 +25,26 @@ void ThreadFinder::proceed(const QDir& _dir)
     if (!m_work)
         return;
 
-    QStringList listFiles =
+    QStringList _listFiles =
         _dir.entryList(m_mask, QDir::Files);
 
-    foreach (QString file, listFiles)
+    QStringList _result;
+
+    foreach (QString _file, _listFiles)
     {
-        m_result.append(_dir.absoluteFilePath(file));
+        _result.append(_dir.absoluteFilePath(_file));
     }
 
-    QStringList listDir = _dir.entryList(QDir::Dirs);
-    foreach (QString subdir, listDir)
+    emit foundFiles(_result);
+
+    QStringList _listDir = _dir.entryList(QDir::Dirs);
+    foreach (QString _subdir, _listDir)
     {
-        if (subdir == "." || subdir == "..")
+        if (_subdir == "." || _subdir == "..")
         {
             continue;
         }
-        proceed(QDir(_dir.absoluteFilePath(subdir)));
+        proceed(QDir(_dir.absoluteFilePath(_subdir)));
     }
 
 }

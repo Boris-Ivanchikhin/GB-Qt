@@ -1,5 +1,7 @@
 #include <QtWidgets>
 #include <QGridLayout>
+#include <QMessageBox>
+
 #include "FileFinder.h"
 
 FileFinder::FileFinder(QDir folder, QWidget* pwgt/*= 0*/) : QDialog(pwgt)// QWidget(pwgt)
@@ -35,6 +37,7 @@ FileFinder::FileFinder(QDir folder, QWidget* pwgt/*= 0*/) : QDialog(pwgt)// QWid
     pgrdLayout->addWidget(pcmdFind, 1, 2);
     pgrdLayout->addWidget(m_ptxtResult, 2, 0, 1, 3);
     setLayout(pgrdLayout);
+
 }
 
 FileFinder::~FileFinder()
@@ -87,27 +90,48 @@ void FileFinder::start(const QDir& dir)
         return;
     }
 
+    //m_ptxtResult->clear();
+
     QStringList mask = m_ptxtMask->text().split(" ");
     findThread = QSharedPointer<ThreadFinder>::create(dir, mask, this);
     findThread->start(QThread::NormalPriority);
 
+    connect(findThread.get(), SIGNAL(startedThread()),
+            this, SLOT(newSearchStarted()));
+
     connect(findThread.get(), SIGNAL(stopedThread()),
             this, SLOT(deleteThread()));
+
+
 
     connect(findThread.get(), SIGNAL(foundFiles(QStringList)),
             this, SLOT(getFiles(QStringList)));
 
 }
 
+void FileFinder::newSearchStarted()
+{
+    m_ptxtResult->clear();
+}
 
 void FileFinder::deleteThread()
 {
     findThread.reset();
+    //QMessageBox::information(this, "File search", "File search completed...", QMessageBox::Ok, QMessageBox::Information);
+    QMessageBox* msgBox = new QMessageBox (
+        QMessageBox::Icon::Information,
+        "File search",
+        "File search completed...",
+        QMessageBox::StandardButton::Ok,
+        this);
+    msgBox->exec();
+    delete msgBox;
+
 }
 
 void FileFinder::getFiles(QStringList listFiles)
 {
-    m_ptxtResult->clear();
+    //m_ptxtResult->clear();
 
     foreach (QString file, listFiles)
     {

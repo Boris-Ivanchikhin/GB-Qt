@@ -32,12 +32,13 @@ private:
 
     QDir m_dir;
     QStringList m_mask;
-    QStringList m_result;
+    //QStringList m_result;
 
     bool m_work; // Завершение потока извне
 
 signals:
 
+    void startedThread(); // Сигнал старта поиска
     void foundFiles(QStringList); // Сообщение о найденных файлах
     void stopedThread(); // Сигнал завершения поиска
 
