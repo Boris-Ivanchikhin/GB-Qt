@@ -1,5 +1,14 @@
-#### Course: C++. Development of programs with a graphical interface in Qt
+#### Course: C++. Development of programs with a graphical interface in Qt  
+#### Lesson 08. Timers, processes and threads in Qt.  
 
 ***  
 
-Practical examples using [Qt](https://www.qt.io/).
+#### Задачи.  
+
+1. Добавить в текстовый редактор возможность вставлять дату и время в текст по позиции курсора.  
+
+2. В проект файловый менеджер добавить возможность поиска папки или файла по имени. Поиск должен выполнятся во вторичном потоке.  
+
+
+
+
