@@ -1,5 +1,15 @@
-#### Course: C++. Development of programs with a graphical interface in Qt
+#### Course: C++. Development of programs with a graphical interface in Qt  
+#### Lesson 10. Additional development tools and Qt build tools.  
 
 ***  
 
-Practical examples using [Qt](https://www.qt.io/).
+#### Задачи.  
+
+1. Для проекта из предыдущего урока (планировщик задач) добавить отображение количества введенных задач.  
+
+2. Добавить валидацию вводимых данных. Название задачи - непустая строка, дата - строка в формате dd.mm.yyyy. Если хотя бы одно значение не пройдет валидацию, не добавлять задачу и вывести предупреждение пользователю.  
+
+
+
+
+
