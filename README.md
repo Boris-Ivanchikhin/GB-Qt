@@ -1,5 +1,13 @@
-#### Course: C++. Development of programs with a graphical interface in Qt
+#### Course: C++. Development of programs with a graphical interface in Qt  
+#### Lesson 11. Working with databases (DB) in Qt.  
 
 ***  
 
-Practical examples using [Qt](https://www.qt.io/).
+#### Задача.  
+
+Сохранение задач реализовать в базе данных SQLite, а не в файле.  
+
+
+
+
+
